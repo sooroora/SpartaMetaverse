@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TappyPlanePlayer : MonoBehaviour
+public class PlayerTappyPlane : MonoBehaviour
 {
     [SerializeField] float       jumpForce;
     private          Rigidbody2D rb;

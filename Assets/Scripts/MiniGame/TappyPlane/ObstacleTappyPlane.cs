@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class TappyPlaneObstacle : MonoBehaviour
+public class ObstacleTappyPlane : MonoBehaviour
 {
     [SerializeField] private float columnMinSpace = 9.5f;
     [SerializeField] private float columnMaxSpace = 12f;

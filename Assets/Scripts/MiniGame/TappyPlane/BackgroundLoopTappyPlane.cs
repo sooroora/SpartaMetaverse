@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TappyPlaneBackgroundLoop : MonoBehaviour
+public class BackgroundLoopTappyPlane : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class TappyPlaneBackgroundLoop : MonoBehaviour
             other.transform.localPosition = new Vector3(other.transform.localPosition.x + 32.0f, 
                 other.transform.localPosition.y, other.transform.localPosition.z);
         }
-        else if (other.GetComponent<TappyPlaneObstacle>() is TappyPlaneObstacle obstacle)
+        else if (other.GetComponent<ObstacleTappyPlane>() is ObstacleTappyPlane obstacle)
         {
             other.transform.localPosition = new Vector3(other.transform.localPosition.x + 30.0f, 
                 other.transform.localPosition.y, other.transform.localPosition.z);

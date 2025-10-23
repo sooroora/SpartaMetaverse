@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TappyPlaneMinigame : MonoBehaviour
+public class TappyPlaneMiniGame : MiniGame
 {
-    [SerializeField] TappyPlaneBackground background;
-    [SerializeField] TappyPlanePlayer player;
+    [SerializeField] BackgroundTappyPlane background;
+    [SerializeField] PlayerTappyPlane player;
 
     private Vector3 playerOriginPos;
     private Vector3 backgroundOriginPos;
@@ -16,14 +16,11 @@ public class TappyPlaneMinigame : MonoBehaviour
         playerOriginPos = player.transform.position;
         backgroundOriginPos = background.transform.position;
     }
-    
-    void OnEnable()
-    {
-        Init();
-    }
 
-    void Init()
+    public override void Init()
     {
+        base.Init();
+        
         player.transform.position = playerOriginPos;
         background.transform.position = backgroundOriginPos;
         

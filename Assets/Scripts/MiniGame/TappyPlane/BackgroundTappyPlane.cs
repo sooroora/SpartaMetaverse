@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TappyPlaneBackground : MonoBehaviour
+public class BackgroundTappyPlane : MonoBehaviour
 {
     [SerializeField] private float speed;
 
@@ -14,9 +14,6 @@ public class TappyPlaneBackground : MonoBehaviour
     Vector3 backgroundOriginPos;
     //float backs
 
-    private void Awake()
-    {
-    }
 
     public void Init()
     {
