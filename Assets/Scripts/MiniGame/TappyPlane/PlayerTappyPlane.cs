@@ -12,7 +12,11 @@ public class PlayerTappyPlane : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+    public void Init()
+    {
+        
+    }
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

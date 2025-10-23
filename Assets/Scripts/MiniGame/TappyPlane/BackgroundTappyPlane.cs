@@ -14,7 +14,7 @@ public class BackgroundTappyPlane : MonoBehaviour
     Vector3 backgroundOriginPos;
     //float backs
 
-
+    
     public void Init()
     {
         speed = 1;
