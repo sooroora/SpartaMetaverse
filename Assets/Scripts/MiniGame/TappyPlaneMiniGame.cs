@@ -18,9 +18,10 @@ public class TappyPlaneMiniGame : MiniGame
     public override void Init()
     {
         base.Init();
-
-        cam.transform.position = this.transform.position + (Vector3.back * 10);
-        cam.orthographicSize   = 3.0f;
+    
+        followingCam.enabled = false;
+        followingCam.transform.position = this.transform.position + (Vector3.back * 10);
+        followingCam.SetOrthographicSize(3.0f);
 
         player.transform.localPosition     = playerOriginPos;
         player.transform.rotation     = Quaternion.identity;
@@ -34,5 +35,6 @@ public class TappyPlaneMiniGame : MiniGame
     // Update is called once per frame
     void Update()
     {
+        base.Update();
     }
 }

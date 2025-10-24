@@ -5,17 +5,13 @@ using UnityEngine;
 
 public class MiniGame : MonoBehaviour
 {
-    protected Camera  cam;
-    protected Vector3 camOriginPosition;
-    float             camOrthoSize;
-    public bool       isDead { get; protected set; }
+    protected FollowingCamera followingCam;
+    public bool               isDead { get; protected set; }
 
     public virtual void Init()
     {
         isDead            = false;
-        cam               = Camera.main;
-        camOriginPosition = Camera.main.transform.position;
-        camOrthoSize      = cam.orthographicSize;
+        followingCam      = Camera.main.GetComponent<FollowingCamera>();
     }
 
 
@@ -24,16 +20,17 @@ public class MiniGame : MonoBehaviour
         Release();
     }
 
+    protected void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
     public virtual void Release()
     {
-        if (cam == null) return;
-
-        cam.orthographic     = true;
-        cam.orthographicSize = camOrthoSize;
-
-        cam.transform.parent   = null;
-        cam.transform.position = camOriginPosition;
-        cam.transform.rotation = Quaternion.identity;
+        followingCam.SetMetaverseCamera();
     }
 
     public virtual void GameStart()

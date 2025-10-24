@@ -1,0 +1,7 @@
+using UnityEngine;
+
+// Player 컴포넌트들 관리하는 애
+public class PlayerMetaverse : Player
+{
+
+}
