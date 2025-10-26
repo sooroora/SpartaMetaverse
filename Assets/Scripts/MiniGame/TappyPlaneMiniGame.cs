@@ -7,9 +7,10 @@ public class TappyPlaneMiniGame : MiniGame
 {
     [SerializeField] BackgroundTappyPlane background;
     [SerializeField] PlayerTappyPlane     player;
-
-    private Vector3 playerOriginPos     = new Vector3(-2, 0, 0);
-    private Vector3 backgroundOriginPos = new Vector3(-5.5f, -3, 0);
+    
+    // 태피플레인 초기화 값
+    private readonly Vector3 playerOriginPos     = new Vector3(-2, 0, 0);
+    private readonly Vector3 backgroundOriginPos = new Vector3(-5.5f, -3, 0);
 
     void Awake()
     {
@@ -18,16 +19,15 @@ public class TappyPlaneMiniGame : MiniGame
     public override void Init()
     {
         base.Init();
-    
-        followingCam.enabled = false;
+
+        followingCam.SetIsFixed(true);
         followingCam.transform.position = this.transform.position + (Vector3.back * 10);
         followingCam.SetOrthographicSize(3.0f);
-
+    
+        // 위치 초기화
         player.transform.localPosition     = playerOriginPos;
-        player.transform.rotation     = Quaternion.identity;
+        player.transform.rotation          = Quaternion.identity;
         background.transform.localPosition = backgroundOriginPos;
-
-        //this.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0);
 
         background.Init();
     }

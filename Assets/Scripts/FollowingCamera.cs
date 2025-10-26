@@ -10,7 +10,8 @@ public class FollowingCamera : MonoBehaviour
     private float limitCamMinPosY;
     private float limitCamMaxPosY;
 
-    private bool isLimitCam = true;
+    public bool isLimitCam = true;
+    public bool isFixed    = false;
 
     [SerializeField] private GameObject target;
 
@@ -26,6 +27,9 @@ public class FollowingCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(isFixed)
+            return;
+        
         if (isLimitCam)
         {
             this.transform.position =
@@ -37,8 +41,8 @@ public class FollowingCamera : MonoBehaviour
         else
         {
             this.transform.position = 
-                new Vector3(Mathf.Clamp(target.transform.position.x, limitCamMinPosX, limitCamMaxPosX),
-                    Mathf.Clamp(target.transform.position.y, limitCamMinPosY, limitCamMaxPosY),
+                new Vector3(target.transform.position.x,
+                    target.transform.position.y,
                     this.transform.position.z
                 );
         
@@ -76,6 +80,11 @@ public class FollowingCamera : MonoBehaviour
         isLimitCam = _isLimitCam;
     }
 
+    public void SetIsFixed(bool _isFixed)
+    {
+        isFixed = _isFixed;
+    }
+
     public void SetOrthographicSize(float _orthographicSize)
     {
         cam.orthographicSize = _orthographicSize;
@@ -89,10 +98,12 @@ public class FollowingCamera : MonoBehaviour
     public void SetMetaverseCamera()
     {
         ResetLimitValue();
-        target                  = MetaverseGameManager.instance.player.gameObject;
+        target                  = MetaverseGameManager.Instance.player.gameObject;
         this.transform.position = target.transform.position + (Vector3.back * 10);
 
-        SetLimitCam(true);
+        isLimitCam = true;
+        isFixed    = false;
+        
         cam.orthographic     = true;
         cam.orthographicSize = 1;
 

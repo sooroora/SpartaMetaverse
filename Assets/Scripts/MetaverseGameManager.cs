@@ -11,12 +11,12 @@ public class MetaverseGameManager : MonoBehaviour
 
     [SerializeField] public PlayerMetaverse player;
 
-    public static MetaverseGameManager instance;
+    public static MetaverseGameManager Instance;
 
     private void Awake()
     {
-        if(instance ==null)
-            instance = this;
+        if(Instance ==null)
+            Instance = this;
     }
 
     private void Update()
