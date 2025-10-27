@@ -4,27 +4,30 @@ public class ResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = .5f;
 
-    private BaseController       baseController;
-    private CharacterStatHandler statHandler;
-    private CharacterAnimatorHandler     animationHandler;
+    private CharacterShootingGame    character;
+    private CharacterStatHandler     statHandler;
+    private CharacterAnimatorHandler animationHandler;
     
     private float timeSinceLastChange = float.MaxValue;
+    
+    public GameObject hpBar;
 
     public float CurrentHp { get; private set; }
     public float MaxHp     => statHandler.MaxHp;
 
     private void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        character        = this.GetComponent<CharacterShootingGame>();
         statHandler      = GetComponent<CharacterStatHandler>();
         animationHandler = GetComponent<CharacterAnimatorHandler>();
-        baseController   = GetComponent<BaseController>();
+        CurrentHp        = statHandler.MaxHp;
     }
-
-    private void Start()
-    {
-        CurrentHp = statHandler.MaxHp;
-    }
-
+    
     private void Update()
     {
         if (timeSinceLastChange < healthChangeDelay)
@@ -47,7 +50,9 @@ public class ResourceController : MonoBehaviour
         CurrentHp       += change;
         CurrentHp       =  CurrentHp > MaxHp ? MaxHp : CurrentHp;
         CurrentHp       =  CurrentHp < 0 ? 0 : CurrentHp;
-
+        
+        hpBar.transform.localScale = new Vector3(CurrentHp / MaxHp, 1f, 1f);
+        
         if (change < 0)
         {
             animationHandler.Damage();
@@ -63,7 +68,7 @@ public class ResourceController : MonoBehaviour
 
     private void Death()
     {
-        baseController?.Death();
+        character?.Death();
     }
 
 }

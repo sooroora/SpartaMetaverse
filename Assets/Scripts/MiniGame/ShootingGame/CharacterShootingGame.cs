@@ -4,25 +4,10 @@ using UnityEngine;
 
 public class CharacterShootingGame : Character
 {
-    //private   Character   character;
     protected Rigidbody2D _rigidbody;
 
     [SerializeField] protected SpriteRenderer characterRenderer;
     [SerializeField] protected Transform      weaponPivot;
-
-    //protected Vector2 movementDirection = Vector2.zero;
-
-    // public Vector2 MovementDirection
-    // {
-    //     get { return movementDirection; }
-    // }
-    //
-    // protected Vector2 lookDirection = Vector2.zero;
-    //
-    // public Vector2 LookDirection
-    // {
-    //     get { return lookDirection; }
-    // }
 
     private Vector2 knockback         = Vector2.zero;
     private float   knockbackDuration = 0.0f;
@@ -35,7 +20,7 @@ public class CharacterShootingGame : Character
     protected bool  isAttacking;
     private   float timeSinceLastAttack = float.MaxValue;
 
-    protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
         
@@ -52,7 +37,7 @@ public class CharacterShootingGame : Character
     {
     }
 
-    protected void Update()
+    protected override void Update()
     {
         base.Update();
         
@@ -123,10 +108,9 @@ public class CharacterShootingGame : Character
         }
     }
 
-    protected virtual void Attack()
+    public virtual void Attack()
     {
-        //if (lookDirection != Vector2.zero)
-            weaponHandler?.Attack();
+        weaponHandler?.Attack();
     }
     
     public virtual void Death()

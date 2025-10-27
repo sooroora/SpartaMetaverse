@@ -98,6 +98,8 @@ public class FollowingCamera : MonoBehaviour
     public void SetMetaverseCamera()
     {
         // 게임을 끌 때도 들어와서 missingreference 나고 있음...
+        if (this == null) return;
+        
         ResetLimitValue();
         target                  = MetaverseGameManager.Instance.player.gameObject;
         this.transform.position = target.transform.position + (Vector3.back * 10);

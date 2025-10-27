@@ -13,12 +13,12 @@ public class SoundManager : MonoBehaviour
     {
         if (!instance)
         {
-            GameObject aManager = new GameObject();
-            DontDestroyOnLoad(aManager);
-            aManager.AddComponent<SoundManager>();
-            aManager.name = "AudioManager";
+            GameObject soundManager = new GameObject();
+            DontDestroyOnLoad(soundManager);
+            soundManager.AddComponent<SoundManager>();
+            soundManager.name = "SoundManager";
             
-            instance = aManager.GetComponent<SoundManager>();
+            instance = soundManager.GetComponent<SoundManager>();
             
             instance.ReadSounds();
         }

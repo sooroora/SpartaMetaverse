@@ -54,6 +54,9 @@ TagManager:
   - name: MetaverseDeco
     uniqueID: 3372726107
     locked: 0
+  - name: MetaverseWorldUI
+    uniqueID: 588102845
+    locked: 0
   - name: MiniGameBack
     uniqueID: 3347320649
     locked: 0

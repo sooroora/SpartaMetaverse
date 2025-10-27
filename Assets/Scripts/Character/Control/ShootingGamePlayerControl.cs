@@ -10,7 +10,7 @@ public class ShootingGamePlayerControl : PlayerControl
 
 
 
-    protected void Awake()
+    protected override void Awake()
     {
         player = character as PlayerShootingGame;
         

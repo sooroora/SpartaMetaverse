@@ -36,7 +36,7 @@ public class TappyPlaneMiniGame : MiniGame
         background.Init();
 
         Time.timeScale = 0;
-        CommonUIManager.instance.StartCountDown(3.0f);
+        CommonUIManager.Instance.StartCountDown(3.0f);
         StartCoroutine(Utility.DelayActionRealTime(3.0f, GameStart));
     }
 
@@ -47,19 +47,19 @@ public class TappyPlaneMiniGame : MiniGame
         playTime       = 0.0f;
         
         Time.timeScale = 1.0f;
-        CommonUIManager.instance.SetActiveScore(true);
+        CommonUIManager.Instance.SetActiveScore(true);
         
         isPlaying = true;
     }
 
-    void Update()
+    protected override void Update()
     {
         base.Update();
 
         if (isPlaying)
         {
             playTime += Time.deltaTime;
-            CommonUIManager.instance.UpdateScore((int)playTime);
+            CommonUIManager.Instance.UpdateScore((int)playTime);
         }
     }
 
@@ -68,13 +68,13 @@ public class TappyPlaneMiniGame : MiniGame
         base.GameOver();
         
         isPlaying = false;
-        CommonUIManager.instance.ShowGameOver();
+        CommonUIManager.Instance.ShowGameOver();
         MiniGameSaveData.SaveMiniGameHighScore(MiniGameType.TappyPlane, (int)playTime);
         
         StartCoroutine(Utility.DelayActionRealTime(3.0f, ()=>
         {
-           this.gameObject.SetActive(false);
-            CommonUIManager.instance.SetActiveScore(false);
+            this.gameObject.SetActive(false);
+            CommonUIManager.Instance.SetActiveScore(false);
         }));
     }
 }

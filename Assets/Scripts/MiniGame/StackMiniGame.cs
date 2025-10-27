@@ -24,8 +24,8 @@ public class StackMiniGame : MiniGame
     private float     blockTransition   = 0f;
     private float     secondaryPosition = 0f;
 
-    private float stackCount = -1;
-    private int   comboCount = 0;
+    private int stackCount = -1;
+    private int comboCount = 0;
 
     List<GameObject> blockPools  = new List<GameObject>();
     List<GameObject> rubblePools = new List<GameObject>();
@@ -40,7 +40,7 @@ public class StackMiniGame : MiniGame
     public override void Init()
     {
         base.Init();
-        
+
         followingCam.SetOrthographic(false);
         followingCam.SetLimitCam(false);
         followingCam.SetIsFixed(true);
@@ -56,7 +56,7 @@ public class StackMiniGame : MiniGame
         lastBlock   = null;
         stackBounds = new Vector2(BoundSize, BoundSize);
         desiredPos  = Vector3.zero;
-        
+
         blockParent.transform.localPosition = Vector3.zero;
 
         isMovingX = true;
@@ -67,34 +67,32 @@ public class StackMiniGame : MiniGame
 
         //하나는 스폰해두고
         SpawnBlock();
-        
-        Time.timeScale = 0f;
-        CommonUIManager.instance.StartCountDown(3.0f);
+
+        CommonUIManager.Instance.StartCountDown(3.0f);
         StartCoroutine(Utility.DelayActionRealTime(3.0f, GameStart));
-        //GameStart();
     }
 
 
     public override void GameStart()
     {
-        base.GameStart();
-
         if (originBlock == null)
             return;
-        
+
+        base.GameStart();
+
         SpawnBlock();
-        
-        Time.timeScale = 1.0f;
-        CommonUIManager.instance.SetActiveScore(true);
+        CommonUIManager.Instance.SetActiveScore(true);
     }
 
-    private void Update()
+    protected override void Update()
     {
         base.Update();
-        
-        if (isDead)
+
+        if (isDead == true || isPlaying == false)
             return;
 
+
+        CommonUIManager.Instance.UpdateScore(stackCount);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (PlaceBlock())
@@ -103,10 +101,9 @@ public class StackMiniGame : MiniGame
             }
             else
             {
-                isDead = true;
-                //죽었다!
-
+                isDead                                          = true;
                 lastBlock.GetComponent<Rigidbody>().isKinematic = false;
+                GameOver();
             }
         }
 
@@ -216,7 +213,7 @@ public class StackMiniGame : MiniGame
 
     void ColorChange(GameObject nowBlock)
     {
-        Color applyColor = Color.Lerp(prevColor, nextColor, (stackCount % 11) / 10);
+        Color applyColor = Color.Lerp(prevColor, nextColor, ((float)stackCount % 11) / 10);
         nowBlock.GetComponent<Renderer>().material.color = applyColor;
 
         followingCam.cam.backgroundColor = applyColor;
@@ -263,10 +260,13 @@ public class StackMiniGame : MiniGame
                             : lastPosition.x - stackBounds.x / 2 - rubbleHalfScale,
                         lastPosition.y, lastPosition.z),
                     new Vector3(deltaX, 1, stackBounds.y));
+                comboCount = 0;
             }
             else
             {
                 lastBlock.localPosition = prevBlockPos + Vector3.up;
+
+                comboCount += 1;
             }
         }
         else
@@ -298,10 +298,13 @@ public class StackMiniGame : MiniGame
                             ? lastPosition.z + stackBounds.y / 2 + rubbleHalfScale
                             : lastPosition.z - stackBounds.y / 2 - rubbleHalfScale),
                     new Vector3(stackBounds.x, 1, deltaZ));
+                comboCount = 0;
             }
             else
             {
                 lastBlock.localPosition = prevBlockPos + Vector3.up;
+
+                comboCount += 1;
             }
         }
 
@@ -318,7 +321,7 @@ public class StackMiniGame : MiniGame
         {
             if (rubble.activeInHierarchy == false)
             {
-                newRubble = rubble;
+                newRubble                                    = rubble;
                 newRubble.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 newRubble.SetActive(true);
                 break;
@@ -336,11 +339,22 @@ public class StackMiniGame : MiniGame
         newRubble.transform.localScale    = scale;
         newRubble.transform.localPosition = pos;
 
-        newRubble.GetComponent<Renderer>().material.color = lastBlock.GetComponent<Renderer>().material.color; 
-            
-        StartCoroutine(Utility.DelayAction(3.0f, () =>
+        newRubble.GetComponent<Renderer>().material.color = lastBlock.GetComponent<Renderer>().material.color;
+
+        StartCoroutine(Utility.DelayAction(3.0f, () => { newRubble.SetActive(false); }));
+    }
+
+    public override void GameOver()
+    {
+        base.GameOver();
+        isPlaying = false;
+        CommonUIManager.Instance.ShowGameOver();
+        MiniGameSaveData.SaveMiniGameHighScore(MiniGameType.StackGame, (int)stackCount);
+
+        StartCoroutine(Utility.DelayActionRealTime(3.0f, () =>
         {
-            newRubble.SetActive(false);
+            this.gameObject.SetActive(false);
+            CommonUIManager.Instance.SetActiveScore(false);
         }));
     }
 }

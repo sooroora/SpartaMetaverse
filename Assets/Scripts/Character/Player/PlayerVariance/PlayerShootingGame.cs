@@ -5,30 +5,22 @@ using UnityEngine;
 
 public class PlayerShootingGame : CharacterShootingGame
 {
-    //[SerializeField] public CharacterAttackControlData attackControlData;
+    // 플레이어만 따로 할 수 있는 행동이 있으면 해주기
+    // 근데 없당
 
-    protected void Awake()
+    ShootingMiniGame nowMiniGame;
+
+    public void Init(ShootingMiniGame miniGame)
     {
-        base.Awake();
-
+        nowMiniGame             = miniGame;
+        this.transform.position = miniGame.transform.position;
+        this.moveControlData.Init(this.transform);
+        this.GetComponent<ResourceController>().Init();
+        
     }
 
-    protected void Update()
+    public override void Death()
     {
-        base.Update();
-
-        // if (attackControlData.nowDelay > 0)
-        // {
-        //     attackControlData.nowDelay -= Time.deltaTime;
-        // }
-    }
-
-    public void Attack()
-    {
-        weaponHandler.Attack();
-    }
-
-    void CollisionEnter2D(Collision2D collision)
-    {
+        nowMiniGame.GameOver();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class EnemyShootingGame : CharacterShootingGame
 {
@@ -9,7 +10,7 @@ public class EnemyShootingGame : CharacterShootingGame
     
     [SerializeField] private float followRange = 15f;
     
-    protected void Awake()
+    protected override void Awake()
     {
         Grid grid = GameObject.Find("Grid_ShootingGame").GetComponent<Grid>();
         moveControlData.Init(this.transform, grid);
@@ -25,20 +26,19 @@ public class EnemyShootingGame : CharacterShootingGame
     }
     
 
-    protected void Update()
+    protected override void Update()
     {
         base.Update();
-
         
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
+        moveControlData.lastDirection = new Vector3Int((int)direction.x, (int)direction.y, 0);
+        
         
         isAttacking = false;
         
         if (distance <= followRange)
         {
-            //lookDirection = direction;
-            
             if (distance <= weaponHandler.AttackRange)
             {
                 int layerMaskTarget = weaponHandler.target;
@@ -52,9 +52,7 @@ public class EnemyShootingGame : CharacterShootingGame
                 
                 return;
             }
-            
         }
-        
         
         if (moveControlData.prevWorldPos != moveControlData.targetWorldPos)
             return;
@@ -62,7 +60,21 @@ public class EnemyShootingGame : CharacterShootingGame
         if(distance <= weaponHandler.AttackRange)
             return;
         
-        moveControlData.lastDirection = new Vector3Int((int)direction.x, (int)direction.y, 0);
+        
+        // 벽 넘어서는 오지마
+
+        Vector3 dirFloat = moveControlData.lastDirection;
+        RaycastHit2D[] hits = Physics2D.LinecastAll(this.transform.position,
+            this.transform.position + (dirFloat * moveControlData.collisionCheckDis));
+        
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider is TilemapCollider2D == true)
+            {
+                return;
+            }
+        }
+        
         moveControlData.SetNextPositionDir(moveControlData.lastDirection);
 
 
@@ -88,5 +100,6 @@ public class EnemyShootingGame : CharacterShootingGame
     {
         base.Death();
         enemyManager.RemoveEnemyOnDeath(this);
+        
     }
 }

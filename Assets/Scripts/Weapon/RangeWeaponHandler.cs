@@ -39,11 +39,14 @@ public class RangeWeaponHandler : WeaponHandler
 
     private void Update()
     {
+        if(character==null)
+            return;
+        
         Vector2 dir   = (Vector3)character.moveControlData.lastDirection;
         // 활 각도 계산
         float   angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        if (character.transform.localScale.x < 0)
+        if (character?.transform.localScale.x < 0)
         {
             angle =  180 - angle;
             angle *= -1f;

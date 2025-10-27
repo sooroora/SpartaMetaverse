@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
 {
     public Character character;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         
     }
@@ -66,7 +66,6 @@ public class PlayerControl : MonoBehaviour
             {
                 return;
             }
-            
         }
 
         character.moveControlData.SetNextPositionDir(character.moveControlData.lastDirection);

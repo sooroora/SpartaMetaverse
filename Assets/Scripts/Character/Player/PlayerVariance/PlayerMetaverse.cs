@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMetaverse : Player
 {
 
-    protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
         moveControlData.lastDirection = Vector3Int.down;

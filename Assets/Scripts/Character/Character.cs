@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     
     [SerializeField] public CharacterMoveControlData moveControlData;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         sortOrder = this.GetComponent<SpriteSortOrder>();
         anim      = GetComponent<CharacterAnimatorHandler>();
@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
         moveControlData.Init(this.transform);
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         Move();
     }

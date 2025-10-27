@@ -116,10 +116,10 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartWave(1);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     StartWave(1);
+        // }
         
     }
     
@@ -134,8 +134,9 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (EnemyShootingGame enemy in activeEnemies)
         {
-            Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
+        
         activeEnemies.Clear();
     }
 }

@@ -6,20 +6,23 @@ using UnityEngine;
 
 public class CommonUIManager : MonoBehaviour
 {
-    public static CommonUIManager instance;
+    public static CommonUIManager Instance;
     
     [SerializeField]         TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI countDownText;
     [SerializeField] TextMeshProUGUI gameOverText;
 
+    private UIMiniGameScore[] gameScores;
 
     private void Awake()
     {
-        if(instance == null)
-            instance = this;
+        if(Instance == null)
+            Instance = this;
         
         scoreText.gameObject.SetActive(false);
         countDownText.gameObject.SetActive(false);
+        
+        gameScores = GameObject.FindObjectsOfType<UIMiniGameScore>(true);
         
     }
 
@@ -61,6 +64,13 @@ public class CommonUIManager : MonoBehaviour
         }
         
         countDownText.gameObject.SetActive(false);
-        
+    }
+
+    public void UpdateHighScore()
+    {
+        foreach (UIMiniGameScore score in gameScores)
+        {
+            score.UpdateHighScore();
+        }
     }
 }

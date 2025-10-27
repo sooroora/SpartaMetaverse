@@ -24,7 +24,7 @@ public class MiniGame : MonoBehaviour
         Release();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
@@ -34,13 +34,16 @@ public class MiniGame : MonoBehaviour
 
     public virtual void Release()
     {
-        followingCam.SetMetaverseCamera();
-        ControlManager.Instance.SetControlPlayer(MetaverseGameManager.Instance.player.GetComponent<PlayerControl>());
+        if(this == null) return;
+        
+        followingCam?.SetMetaverseCamera();
+        ControlManager.Instance?.SetControlPlayer(MetaverseGameManager.Instance.player.GetComponent<PlayerControl>());
+        CommonUIManager.Instance?.UpdateHighScore();
     }
 
     public virtual void GameStart()
     {
-        
+        isPlaying      = true;
     }
 
     public virtual void GameOver()

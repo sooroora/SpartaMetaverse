@@ -30,7 +30,6 @@ public class MeleeWeaponHandler : WeaponHandler
         // }
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.name);
             ResourceController resourceController = hit.collider.GetComponent<ResourceController>();
             if(resourceController != null)
             {

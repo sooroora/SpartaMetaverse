@@ -5,10 +5,13 @@ using UnityEngine.Events;
 
 public class EventZone : MonoBehaviour
 {
-    [SerializeField] private UnityAction OnTriggerEnter;
+    [SerializeField] private UnityEvent OnTriggerEnter;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        OnTriggerEnter?.Invoke();
+        if (other.gameObject.GetComponent<Player>() != null)
+        {
+            OnTriggerEnter?.Invoke();
+        }
     }
 }
