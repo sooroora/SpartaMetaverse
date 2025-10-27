@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MiniGameBackground
   layers:
   - Default
   - TransparentFX
@@ -11,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Level
   - 
   - 
   - 
@@ -40,4 +41,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MetaverseFloor
+    uniqueID: 3978622931
+    locked: 0
+  - name: MetaverseDecoBack
+    uniqueID: 457844335
+    locked: 0
+  - name: MetaverseDefault
+    uniqueID: 796229155
+    locked: 0
+  - name: MetaverseDeco
+    uniqueID: 3372726107
+    locked: 0
+  - name: MetaverseWorldUI
+    uniqueID: 588102845
+    locked: 0
+  - name: MiniGameBack
+    uniqueID: 3347320649
+    locked: 0
+  - name: MiniGame
+    uniqueID: 1882362587
     locked: 0
