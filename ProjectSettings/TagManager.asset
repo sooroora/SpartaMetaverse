@@ -12,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Level
   - 
   - 
   - 
@@ -41,6 +41,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MetaverseFloor
+    uniqueID: 3978622931
+    locked: 0
+  - name: MetaverseDefault
+    uniqueID: 796229155
+    locked: 0
+  - name: MetaverseDeco
+    uniqueID: 3372726107
     locked: 0
   - name: MiniGameBack
     uniqueID: 3347320649

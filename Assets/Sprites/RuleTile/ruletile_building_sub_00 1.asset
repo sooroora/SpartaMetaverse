@@ -16,7 +16,7 @@ MonoBehaviour:
   m_Sprites: []
   m_GameObjects: []
   m_InstanceTile: {fileID: 2198658791168084280}
-  m_DefaultSprite: {fileID: 960229097, guid: dc3a40e889eb51c40bb83fa65b000f1a, type: 3}
+  m_DefaultSprite: {fileID: -216675463, guid: dc3a40e889eb51c40bb83fa65b000f1a, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_OverrideTilingRules:
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: ruletile_building_base_00 (Override)
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 960229097, guid: dc3a40e889eb51c40bb83fa65b000f1a, type: 3}
+  m_DefaultSprite: {fileID: -216675463, guid: dc3a40e889eb51c40bb83fa65b000f1a, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:

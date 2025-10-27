@@ -43,6 +43,7 @@ public class StackMiniGame : MiniGame
         
         followingCam.SetOrthographic(false);
         followingCam.SetLimitCam(false);
+        followingCam.SetIsFixed(true);
         followingCam.transform.position = this.transform.position + new Vector3(0, 4f, -9f);
         followingCam.transform.rotation = Quaternion.AngleAxis(15, Vector3.right);
 

@@ -12,6 +12,7 @@ public class MiniGame : MonoBehaviour
     {
         isDead            = false;
         followingCam      = Camera.main.GetComponent<FollowingCamera>();
+        ControlManager.Instance.SetControlPlayer(null);
     }
 
 
@@ -31,6 +32,7 @@ public class MiniGame : MonoBehaviour
     public virtual void Release()
     {
         followingCam.SetMetaverseCamera();
+        ControlManager.Instance.SetControlPlayer(MetaverseGameManager.Instance.player.GetComponent<PlayerControl>());
     }
 
     public virtual void GameStart()
