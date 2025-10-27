@@ -17,7 +17,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private Color gizmoColor = new Color(1, 0, 0, 0.3f); // 기즈모 색상
 
-    private List<EnemyController> activeEnemies = new List<EnemyController>(); // 현재 활성화된 적들
+    private List<EnemyShootingGame> activeEnemies = new List<EnemyShootingGame>(); // 현재 활성화된 적들
 
     private bool enemySpawnComplite;
     
@@ -87,10 +87,11 @@ public class EnemyManager : MonoBehaviour
         
         // 적 생성 및 리스트에 추가
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(worldPos.x, worldPos.y), Quaternion.identity);
-        EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
-        enemyController.Init(this,shootingGameManager.ShootingPlayer.transform);
+        spawnedEnemy.transform.SetParent(shootingGameManager.transform);
+        EnemyShootingGame enemy = spawnedEnemy.GetComponent<EnemyShootingGame>();
+        enemy.Init(this,shootingGameManager.ShootingPlayer.transform);
         
-        activeEnemies.Add(enemyController);
+        activeEnemies.Add(enemy);
         
     }
 
@@ -122,10 +123,19 @@ public class EnemyManager : MonoBehaviour
         
     }
     
-    public void RemoveEnemyOnDeath(EnemyController enemy)
+    public void RemoveEnemyOnDeath(EnemyShootingGame enemy)
     {
         activeEnemies.Remove(enemy);
         if (enemySpawnComplite && activeEnemies.Count == 0)
             shootingGameManager.EndOfWave();
+    }
+
+    public void RemoveAllEnemies()
+    {
+        foreach (EnemyShootingGame enemy in activeEnemies)
+        {
+            Destroy(enemy);
+        }
+        activeEnemies.Clear();
     }
 }

@@ -15,7 +15,7 @@ public class FollowingCamera : MonoBehaviour
 
     [SerializeField] private GameObject target;
 
-    private Camera cam;
+    public Camera cam { get; private set; }
 
     public float orthographicSize => cam.orthographicSize;
 

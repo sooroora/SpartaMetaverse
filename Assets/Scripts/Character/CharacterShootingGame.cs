@@ -10,19 +10,19 @@ public class CharacterShootingGame : Character
     [SerializeField] protected SpriteRenderer characterRenderer;
     [SerializeField] protected Transform      weaponPivot;
 
-    protected Vector2 movementDirection = Vector2.zero;
+    //protected Vector2 movementDirection = Vector2.zero;
 
-    public Vector2 MovementDirection
-    {
-        get { return movementDirection; }
-    }
-
-    protected Vector2 lookDirection = Vector2.zero;
-
-    public Vector2 LookDirection
-    {
-        get { return lookDirection; }
-    }
+    // public Vector2 MovementDirection
+    // {
+    //     get { return movementDirection; }
+    // }
+    //
+    // protected Vector2 lookDirection = Vector2.zero;
+    //
+    // public Vector2 LookDirection
+    // {
+    //     get { return lookDirection; }
+    // }
 
     private Vector2 knockback         = Vector2.zero;
     private float   knockbackDuration = 0.0f;
@@ -35,12 +35,11 @@ public class CharacterShootingGame : Character
     protected bool  isAttacking;
     private   float timeSinceLastAttack = float.MaxValue;
 
-    protected virtual void Awake()
+    protected void Awake()
     {
-        //character = this.GetComponent<Character>();
+        base.Awake();
         
         _rigidbody       = GetComponent<Rigidbody2D>();
-        //animationHandler = GetComponent<CharacterAnimatorHandler>();
         statHandler      = GetComponent<CharacterStatHandler>();
 
         if (WeaponPrefab != null)
@@ -53,10 +52,11 @@ public class CharacterShootingGame : Character
     {
     }
 
-    protected virtual void Update()
+    protected void Update()
     {
+        base.Update();
+        
         HandleAction();
-        Rotate(lookDirection);
         HandleAttackDelay();
     }
 
@@ -83,7 +83,6 @@ public class CharacterShootingGame : Character
         }
 
         _rigidbody.velocity = direction;
-        //animationHandler.Move(direction);
     }
 
     private void Rotate(Vector2 direction)
@@ -126,7 +125,7 @@ public class CharacterShootingGame : Character
 
     protected virtual void Attack()
     {
-        if (lookDirection != Vector2.zero)
+        //if (lookDirection != Vector2.zero)
             weaponHandler?.Attack();
     }
     

@@ -320,3 +320,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSelfFlip: 1
+  animator: {fileID: 3209769410140679156}

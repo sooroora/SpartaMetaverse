@@ -56,8 +56,7 @@ public class StackMiniGame : MiniGame
         lastBlock   = null;
         stackBounds = new Vector2(BoundSize, BoundSize);
         desiredPos  = Vector3.zero;
-
-
+        
         blockParent.transform.localPosition = Vector3.zero;
 
         isMovingX = true;
@@ -66,7 +65,13 @@ public class StackMiniGame : MiniGame
         prevColor    = GetRandomColor();
         nextColor    = GetRandomColor();
 
-        GameStart();
+        //하나는 스폰해두고
+        SpawnBlock();
+        
+        Time.timeScale = 0f;
+        CommonUIManager.instance.StartCountDown(3.0f);
+        StartCoroutine(Utility.DelayActionRealTime(3.0f, GameStart));
+        //GameStart();
     }
 
 
@@ -76,9 +81,11 @@ public class StackMiniGame : MiniGame
 
         if (originBlock == null)
             return;
-
+        
         SpawnBlock();
-        SpawnBlock();
+        
+        Time.timeScale = 1.0f;
+        CommonUIManager.instance.SetActiveScore(true);
     }
 
     private void Update()
@@ -212,7 +219,7 @@ public class StackMiniGame : MiniGame
         Color applyColor = Color.Lerp(prevColor, nextColor, (stackCount % 11) / 10);
         nowBlock.GetComponent<Renderer>().material.color = applyColor;
 
-        // 뒤에 2D 배경 보여줄거라 카메라 배경색은 바꾸지 않음
+        followingCam.cam.backgroundColor = applyColor;
 
 
         if (applyColor.Equals(nextColor) == true)

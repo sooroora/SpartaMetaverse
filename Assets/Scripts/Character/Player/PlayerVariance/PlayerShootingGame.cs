@@ -7,17 +7,10 @@ public class PlayerShootingGame : CharacterShootingGame
 {
     //[SerializeField] public CharacterAttackControlData attackControlData;
 
-    protected WeaponHandler weaponHandler;
-
-
     protected void Awake()
     {
         base.Awake();
 
-        if (WeaponPrefab != null)
-            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-        else
-            weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
 
     protected void Update()

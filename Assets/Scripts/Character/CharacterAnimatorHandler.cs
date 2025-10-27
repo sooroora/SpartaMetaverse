@@ -24,16 +24,15 @@ public class CharacterAnimatorHandler : MonoBehaviour
 
     private CharacterMoveControlData moveControlData;
 
-    Animator        animator;
-    private Vector3 prevPos;
+    [SerializeField] Animator animator;
+
 
     public void Awake()
     {
-        animator = GetComponent<Animator>();
-        if(animator == null)
-            animator = GetComponentInChildren<Animator>();
-        
-        prevPos  = transform.position;
+        if (animator == null)
+            animator = GetComponent<Animator>();
+        //animator = GetComponentInChildren<Animator>();
+
         moveControlData = this.GetComponent<Character>().moveControlData;
     }
 
@@ -52,11 +51,9 @@ public class CharacterAnimatorHandler : MonoBehaviour
         if (dir == Vector3.up)
         {
             animator.SetFloat(nameof(AnimParameter.Direction), (int)AnimDirection.Back / 4f);
-               
         }
         else if (dir == Vector3.down)
         {
-            
             animator.SetFloat(nameof(AnimParameter.Direction), (int)AnimDirection.Forward / 4f);
         }
         else
@@ -77,7 +74,7 @@ public class CharacterAnimatorHandler : MonoBehaviour
             }
         }
     }
-    
+
     public void Damage()
     {
         animator.SetTrigger(nameof(AnimParameter.IsDamage));

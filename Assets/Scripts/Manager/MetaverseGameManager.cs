@@ -48,3 +48,11 @@ public class MetaverseGameManager : MonoBehaviour
         miniGames[_num].gameObject.SetActive(true);
     }
 }
+
+
+public enum MiniGameType
+{
+    TappyPlane   = 0,
+    StackGame    = 1,
+    ShootingGame = 2,
+}

@@ -7,11 +7,14 @@ public class TappyPlaneMiniGame : MiniGame
 {
     [SerializeField] BackgroundTappyPlane background;
     [SerializeField] PlayerTappyPlane     player;
-    
+
     // 태피플레인 초기화 값
     private readonly Vector3 playerOriginPos     = new Vector3(-2, 0, 0);
     private readonly Vector3 backgroundOriginPos = new Vector3(-5.5f, -3, 0);
 
+    float playTime = 0.0f;
+    
+    
     void Awake()
     {
     }
@@ -23,18 +26,55 @@ public class TappyPlaneMiniGame : MiniGame
         followingCam.SetIsFixed(true);
         followingCam.transform.position = this.transform.position + (Vector3.back * 10);
         followingCam.SetOrthographicSize(3.0f);
-    
+
         // 위치 초기화
+        player.Init(this);
         player.transform.localPosition     = playerOriginPos;
         player.transform.rotation          = Quaternion.identity;
+        
         background.transform.localPosition = backgroundOriginPos;
-
         background.Init();
+
+        Time.timeScale = 0;
+        CommonUIManager.instance.StartCountDown(3.0f);
+        StartCoroutine(Utility.DelayActionRealTime(3.0f, GameStart));
     }
 
-    // Update is called once per frame
+    public override void GameStart()
+    {
+        base.GameStart();
+        
+        playTime       = 0.0f;
+        
+        Time.timeScale = 1.0f;
+        CommonUIManager.instance.SetActiveScore(true);
+        
+        isPlaying = true;
+    }
+
     void Update()
     {
         base.Update();
+
+        if (isPlaying)
+        {
+            playTime += Time.deltaTime;
+            CommonUIManager.instance.UpdateScore((int)playTime);
+        }
+    }
+
+    public override void GameOver()
+    {
+        base.GameOver();
+        
+        isPlaying = false;
+        CommonUIManager.instance.ShowGameOver();
+        MiniGameSaveData.SaveMiniGameHighScore(MiniGameType.TappyPlane, (int)playTime);
+        
+        StartCoroutine(Utility.DelayActionRealTime(3.0f, ()=>
+        {
+           this.gameObject.SetActive(false);
+            CommonUIManager.instance.SetActiveScore(false);
+        }));
     }
 }

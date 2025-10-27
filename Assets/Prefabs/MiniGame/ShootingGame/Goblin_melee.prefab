@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSelfFlip: 1
+  animator: {fileID: 6436600992902926846}
 --- !u!1 &7635515046004588863
 GameObject:
   m_ObjectHideFlags: 0

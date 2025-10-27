@@ -11,14 +11,11 @@ public class EnemyShootingGame : CharacterShootingGame
     
     protected void Awake()
     {
-        sortOrder = this.GetComponent<SpriteSortOrder>();
-        anim      = GetComponent<CharacterAnimatorHandler>();
-        sortOrder.Sort();
-        
         Grid grid = GameObject.Find("Grid_ShootingGame").GetComponent<Grid>();
         moveControlData.Init(this.transform, grid);
         
-        //target = ShootingMiniGame.
+        base.Awake();
+        
     }
 
     public void Init(EnemyManager _enemyManager, Transform _target)
@@ -32,18 +29,20 @@ public class EnemyShootingGame : CharacterShootingGame
     {
         base.Update();
 
+        
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
         
         isAttacking = false;
+        
         if (distance <= followRange)
         {
-            lookDirection = direction;
+            //lookDirection = direction;
             
             if (distance <= weaponHandler.AttackRange)
             {
                 int layerMaskTarget = weaponHandler.target;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 5.0f,
                     (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
 
                 if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
@@ -51,12 +50,21 @@ public class EnemyShootingGame : CharacterShootingGame
                     isAttacking = true;
                 }
                 
-                movementDirection = Vector2.zero;
                 return;
             }
             
-            movementDirection = direction;
         }
+        
+        
+        if (moveControlData.prevWorldPos != moveControlData.targetWorldPos)
+            return;
+        
+        if(distance <= weaponHandler.AttackRange)
+            return;
+        
+        moveControlData.lastDirection = new Vector3Int((int)direction.x, (int)direction.y, 0);
+        moveControlData.SetNextPositionDir(moveControlData.lastDirection);
+
 
     }
     
@@ -76,6 +84,9 @@ public class EnemyShootingGame : CharacterShootingGame
             return new Vector2(0f, Mathf.Sign(dir.y));   // 상하
     }
 
-
-    
+    public override void Death()
+    {
+        base.Death();
+        enemyManager.RemoveEnemyOnDeath(this);
+    }
 }

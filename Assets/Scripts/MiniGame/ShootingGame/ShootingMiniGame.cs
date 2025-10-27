@@ -17,7 +17,11 @@ public class ShootingMiniGame : MiniGame
     public override void Init()
     {
         base.Init();
-
+        
+        // 제자리로
+        shootingPlayer.transform.position = this.transform.position;
+        shootingPlayer.moveControlData.Init(shootingPlayer.transform);
+        
         followingCam.SetTarget(shootingPlayer.gameObject);
 
         // 이 미니게임에서 쓸 카메라 세팅
@@ -54,13 +58,22 @@ public class ShootingMiniGame : MiniGame
     public void GameOver()
     {
         enemyManager.StopWave();
+        
+        //enemyManager.RemoveAllEnemies();
     }
 
     private void Update()
     {
+        base.Update();
+        
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             StartGame();
         }
+    }
+
+    public override void Release()
+    {
+        base.Release();
     }
 }

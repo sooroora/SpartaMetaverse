@@ -18,7 +18,6 @@ public class Character : MonoBehaviour
         anim      = GetComponent<CharacterAnimatorHandler>();
         sortOrder.Sort();
         moveControlData.Init(this.transform);
-        
     }
 
     protected void Update()

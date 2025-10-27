@@ -8,9 +8,12 @@ public class MiniGame : MonoBehaviour
     protected FollowingCamera followingCam;
     public bool               isDead { get; protected set; }
 
+    public bool isPlaying;
+    
     public virtual void Init()
     {
         isDead            = false;
+        isPlaying        = false;
         followingCam      = Camera.main.GetComponent<FollowingCamera>();
         ControlManager.Instance.SetControlPlayer(null);
     }
@@ -37,6 +40,12 @@ public class MiniGame : MonoBehaviour
 
     public virtual void GameStart()
     {
+        
+    }
+
+    public virtual void GameOver()
+    {
+        
     }
 
 

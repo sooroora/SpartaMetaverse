@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6642069340309695740}
   - component: {fileID: 699724160200290119}
   - component: {fileID: 1299257423446554733}
-  - component: {fileID: 4638250513817234879}
   - component: {fileID: 4290992011348888238}
   - component: {fileID: 7177076264138777874}
   - component: {fileID: 154393441346378792}
@@ -125,22 +124,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.106846094, y: 0.1077955}
   m_EdgeRadius: 0
---- !u!114 &4638250513817234879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3212176230079006152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208ea701becafe94ab5fe223964dcae5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 5098783367384198976}
-  weaponPivot: {fileID: 6383767208294966498}
-  WeaponPrefab: {fileID: 1138682047070197863, guid: 2692e763187e2bc469454dbe608e9053, type: 3}
-  followRange: 15
 --- !u!114 &4290992011348888238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +140,10 @@ MonoBehaviour:
     isBottomPivot: 1
     moveSpeed: 2
     grid: {fileID: 0}
+  characterRenderer: {fileID: 5098783367384198976}
+  weaponPivot: {fileID: 6383767208294966498}
+  WeaponPrefab: {fileID: 1138682047070197863, guid: 2692e763187e2bc469454dbe608e9053, type: 3}
+  followRange: 15
 --- !u!114 &7177076264138777874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSelfFlip: 1
+  animator: {fileID: 6436600992902926846}
 --- !u!1 &7635515046004588863
 GameObject:
   m_ObjectHideFlags: 0
