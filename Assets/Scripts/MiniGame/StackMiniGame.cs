@@ -318,6 +318,10 @@ public class StackMiniGame : MiniGame
             }
         }
 
+        backgroundParticle.gameObject.transform.localPosition = new Vector3(
+            backgroundParticle.gameObject.transform.localPosition.x,
+            lastBlock.gameObject.transform.localPosition.y-3f,
+            backgroundParticle.gameObject.transform.localPosition.z);
         secondaryPosition = (isMovingX) ? lastBlock.localPosition.x : lastBlock.localPosition.z;
 
         return true;

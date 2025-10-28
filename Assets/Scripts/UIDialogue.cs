@@ -16,9 +16,6 @@ public class UIDialogue : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            this.gameObject.SetActive(false);
-        }
+        
     }
 }
