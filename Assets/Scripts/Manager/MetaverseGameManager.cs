@@ -12,13 +12,20 @@ public class MetaverseGameManager : MonoBehaviour
     [SerializeField] public PlayerMetaverse player;
 
     public static MetaverseGameManager Instance;
-
+    
+    SoundManager soundManager;
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
 
         ControlManager.Instance.SetControlPlayer(player.GetComponent<PlayerControl>());
+    }
+
+    private void Start()
+    {
+        soundManager = SoundManager.GetInstance();
+        EnterMetaverse();
     }
 
     private void Update()
@@ -45,7 +52,14 @@ public class MetaverseGameManager : MonoBehaviour
         if (_num < 0 || _num >= miniGames.Length)
             return;
 
+        soundManager.StopBGM();
         miniGames[_num].gameObject.SetActive(true);
+    }
+
+    public void EnterMetaverse()
+    {
+        soundManager.PlayBgm("bgm_september", true, 1f);
+        ControlManager.Instance?.SetControlPlayer(player.GetComponent<PlayerControl>());
     }
 }
 

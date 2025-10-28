@@ -76,12 +76,12 @@ public class ProjectileController : MonoBehaviour
                 // 타일맵에 맞게 한칸씩 하는걸로 바꿔줘야 함
                 if (rangeWeaponHandler.IsOnKnockback)
                 {
-                    BaseController controller = collision.GetComponent<BaseController>();
-                    if (controller != null)
-                    {
-                        controller.ApplyKnockback(transform, rangeWeaponHandler.KnockbackPower,
-                            rangeWeaponHandler.KnockbackTime);
-                    }
+                    // BaseController controller = collision.GetComponent<BaseController>();
+                    // if (controller != null)
+                    // {
+                    //     controller.ApplyKnockback(transform, rangeWeaponHandler.KnockbackPower,
+                    //         rangeWeaponHandler.KnockbackTime);
+                    // }
                 }
             }
 

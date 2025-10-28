@@ -112,6 +112,11 @@ public class CharacterShootingGame : Character
     {
         weaponHandler?.Attack();
     }
+
+    public virtual void GetDamage()
+    {
+        
+    }
     
     public virtual void Death()
     {

@@ -17,7 +17,7 @@ public class CharacterMoveControlData
     public Vector3Int nowGridPos     { get; set; }
     public Vector3    prevWorldPos   { get; set; }
     public Vector3    targetWorldPos { get; set; }
-    public Vector3Int lastDirection  { get; set; }
+    public Vector3Int lastDirection  { get; private set; }
 
     private Action OnMoveAction;
 

@@ -23,6 +23,8 @@ public class TappyPlaneMiniGame : MiniGame
     {
         base.Init();
 
+        SoundManager.GetInstance().PlayBgm("bgm_fun",true,0.5f);
+        
         followingCam.SetIsFixed(true);
         followingCam.transform.position = this.transform.position + (Vector3.back * 10);
         followingCam.SetOrthographicSize(3.0f);

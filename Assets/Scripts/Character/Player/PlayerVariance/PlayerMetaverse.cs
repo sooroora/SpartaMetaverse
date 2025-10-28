@@ -7,6 +7,6 @@ public class PlayerMetaverse : Player
     protected override void Awake()
     {
         base.Awake();
-        moveControlData.lastDirection = Vector3Int.down;
+        moveControlData.SetLastDirection(Vector3Int.down);
     }
 }

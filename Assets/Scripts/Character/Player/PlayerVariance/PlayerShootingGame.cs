@@ -9,6 +9,7 @@ public class PlayerShootingGame : CharacterShootingGame
     // 근데 없당
 
     ShootingMiniGame nowMiniGame;
+    SoundManager soundManager;
 
     public void Init(ShootingMiniGame miniGame)
     {
@@ -16,11 +17,19 @@ public class PlayerShootingGame : CharacterShootingGame
         this.transform.position = miniGame.transform.position;
         this.moveControlData.Init(this.transform);
         this.GetComponent<ResourceController>().Init();
+        soundManager = SoundManager.GetInstance();
         
+    }
+
+    public override void GetDamage()
+    {
+        soundManager.PlayOnce("hit");
     }
 
     public override void Death()
     {
         nowMiniGame.GameOver();
     }
+
+
 }

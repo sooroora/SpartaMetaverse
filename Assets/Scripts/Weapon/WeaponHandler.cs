@@ -70,7 +70,6 @@ public class WeaponHandler : MonoBehaviour
     }
 
 
-    //public BaseController Controller { get; private set; }
 
     private Animator       animator;
     private SpriteRenderer weaponRenderer;
@@ -81,7 +80,6 @@ public class WeaponHandler : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponentInParent<CharacterShootingGame>();
-        //Controller = GetComponentInParent<BaseController>();
         animator       = GetComponentInChildren<Animator>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 

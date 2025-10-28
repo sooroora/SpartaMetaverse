@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class StackMiniGame : MiniGame
 {
-    [SerializeField] GameObject originBlock = null;
-    [SerializeField] GameObject rubblBlock  = null;
-    [SerializeField] Transform  blockParent = null;
+    [SerializeField] GameObject     originBlock        = null;
+    [SerializeField] GameObject     rubblBlock         = null;
+    [SerializeField] Transform      blockParent        = null;
+    [SerializeField] ParticleSystem backgroundParticle = null;
+
 
     private const float BoundSize        = 3.5f;
     private const float MovingBoundsSize = 3f;
@@ -40,6 +44,8 @@ public class StackMiniGame : MiniGame
     public override void Init()
     {
         base.Init();
+
+        SoundManager.GetInstance().PlayBgm("bgm_lighthouse", true, 1f);
 
         followingCam.SetOrthographic(false);
         followingCam.SetLimitCam(false);
@@ -97,11 +103,13 @@ public class StackMiniGame : MiniGame
         {
             if (PlaceBlock())
             {
+                SoundManager.GetInstance().PlayOnce("collect_" + Random.Range(1, 13));
                 SpawnBlock();
             }
             else
             {
-                isDead                                          = true;
+                isDead = true;
+                SoundManager.GetInstance().PlayOnce("fail");
                 lastBlock.GetComponent<Rigidbody>().isKinematic = false;
                 GameOver();
             }
@@ -218,6 +226,8 @@ public class StackMiniGame : MiniGame
 
         followingCam.cam.backgroundColor = applyColor;
 
+        var particleMain = backgroundParticle.main;
+        particleMain.startColor = new ParticleSystem.MinMaxGradient(prevColor * 1.5f, nextColor * 1.5f);
 
         if (applyColor.Equals(nextColor) == true)
         {

@@ -22,12 +22,7 @@ public class MeleeWeaponHandler : WeaponHandler
         RaycastHit2D hit =
             Physics2D.CircleCast(character.transform.position + (dirFloat * 0.08f),
                 0.16f, dirFloat, 0.0f, target);
-            //character.transform.position + (dirFloat * character.moveControlData.collisionCheckDis),target);
 
-        // foreach (RaycastHit2D hit in hits)
-        // {
-        //     
-        // }
         if (hit.collider != null)
         {
             ResourceController resourceController = hit.collider.GetComponent<ResourceController>();
@@ -36,11 +31,7 @@ public class MeleeWeaponHandler : WeaponHandler
                 resourceController.ChangeHealth(-Power);
                 if(IsOnKnockback)
                 {
-                    BaseController controller = hit.collider.GetComponent<BaseController>();
-                    if(controller != null)
-                    {
-                        controller.ApplyKnockback(transform, KnockbackPower, KnockbackTime);
-                    }
+                    // 넉백은 없어... 타일맵 이동에 맞게 만들어야하는데 아직..
                 }
             }
         }
