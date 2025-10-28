@@ -90,7 +90,7 @@ public class SoundManager : MonoBehaviour
     
     public void StopBGM()
     {
-        bgmAudioSource.Stop();
+        bgmAudioSource?.Stop();
     }
 
     public void StopAll()
