@@ -48,4 +48,9 @@ public class MiniGameSaveData
 
         PlayerPrefs.SetInt(minigame.ToString() + "Sub", num);
     }
+
+    public static void ClearSaveData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

@@ -36,6 +36,7 @@ public class ShootingMiniGame : MiniGame
         enemyManager = GetComponentInChildren<EnemyManager>();
         enemyManager.Init(this);
         
+        SoundManager.GetInstance().PlayBgm("bgm_goblinsdance",true,1f);
         
         CommonUIManager.Instance.StartCountDown(3.0f);
         StartCoroutine(Utility.DelayActionRealTime(3.0f, GameStart));
@@ -73,6 +74,7 @@ public class ShootingMiniGame : MiniGame
         
         CommonUIManager.Instance.ShowGameOver();
         MiniGameSaveData.SaveMiniGameHighScore(MiniGameType.ShootingGame,currentWaveIndex);
+        SoundManager.GetInstance().PlayOnce("lose");
 
         StartCoroutine(Utility.DelayActionRealTime(3.0f, () =>
         {

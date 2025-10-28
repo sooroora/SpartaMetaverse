@@ -23,9 +23,6 @@ public class PlayerControl : MonoBehaviour
 
     protected virtual void PlayerInput()
     {
-        // zep 처럼 움직이기
-        // 한칸씩 lerp하면서
-        // 꾹 눌렀을 때도 가능
         if (character.moveControlData.prevWorldPos != character.moveControlData.targetWorldPos)
             return;
         

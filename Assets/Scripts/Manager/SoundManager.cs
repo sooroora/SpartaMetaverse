@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 옛날에 만든거
+// string으로 찾아야해서 불편함. 나중에 enum 같은걸로 바꿔야함!!
 public class SoundManager : MonoBehaviour
 {
     Dictionary<string, AudioClip> clips;
@@ -8,7 +11,7 @@ public class SoundManager : MonoBehaviour
     AudioSource audioSource;
     AudioSource bgmAudioSource;
 
-    public static SoundManager instance;
+    private static SoundManager instance;
     public static SoundManager GetInstance()
     {
         if (!instance)
@@ -24,6 +27,19 @@ public class SoundManager : MonoBehaviour
         }
         return instance;
     }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            GameObject soundManager = this.gameObject;
+            DontDestroyOnLoad(soundManager);
+            instance = this;
+            
+            instance.ReadSounds();
+        }
+    }
+
 
     void ReadSounds()
     {
@@ -42,6 +58,7 @@ public class SoundManager : MonoBehaviour
         GameObject audioObj = new GameObject();
         DontDestroyOnLoad(audioObj);
         audioSource = audioObj.AddComponent<AudioSource>();
+        
     }
     
     
@@ -50,6 +67,8 @@ public class SoundManager : MonoBehaviour
         if(clips.ContainsKey(_name))
             audioSource.PlayOneShot(clips[_name], _volume);;
     }
+    
+  
 
     public void PlayBgm(string _name, bool _loop, float _volume)
     {
@@ -57,7 +76,9 @@ public class SoundManager : MonoBehaviour
         if (clips.ContainsKey(_name))
         {
             bgmAudioSource.loop = _loop;
-            bgmAudioSource.PlayOneShot(clips[_name], _volume);    
+            bgmAudioSource.clip = clips[_name];
+            bgmAudioSource.volume = _volume;
+            bgmAudioSource.Play();
         }
         
     }

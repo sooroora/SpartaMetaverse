@@ -33,6 +33,7 @@ public class PlayerTappyPlane : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Vector2.up * jumpForce;
+            SoundManager.GetInstance().PlayOnce("tappyplane_jump");
         }
         
         // 실제 앞으로 가지 않으니까 요렇게

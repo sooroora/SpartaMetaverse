@@ -32,7 +32,7 @@ public class EnemyShootingGame : CharacterShootingGame
         
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
-        moveControlData.lastDirection = new Vector3Int((int)direction.x, (int)direction.y, 0);
+        moveControlData.SetLastDirection(new Vector3Int((int)direction.x, (int)direction.y, 0));
         
         
         isAttacking = false;
@@ -94,6 +94,12 @@ public class EnemyShootingGame : CharacterShootingGame
             return new Vector2(Mathf.Sign(dir.x), 0f);   // 좌우
         else
             return new Vector2(0f, Mathf.Sign(dir.y));   // 상하
+    }
+
+
+    public override void GetDamage()
+    {
+        SoundManager.GetInstance().PlayOnce("orc_damage_1",0.5f);
     }
 
     public override void Death()
