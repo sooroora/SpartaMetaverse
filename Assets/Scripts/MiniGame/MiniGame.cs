@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MiniGameType
+{
+    TappyPlane   = 0,
+    StackGame    = 1,
+    ShootingGame = 2,
+}
+
 public class MiniGame : MonoBehaviour
 {
     protected FollowingCamera followingCam;

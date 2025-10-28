@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+
 
 public class MetaverseGameManager : MonoBehaviour
 {
@@ -64,9 +66,31 @@ public class MetaverseGameManager : MonoBehaviour
 }
 
 
-public enum MiniGameType
+
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(MetaverseGameManager))]
+public class LevelSelectTest : Editor
 {
-    TappyPlane   = 0,
-    StackGame    = 1,
-    ShootingGame = 2,
+    // 이것저것 필요하면 넣기
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        // 그 아래에 버튼 추가
+        GUILayout.Space(10);
+        GUILayout.Label("디버그");
+        
+        if (GUILayout.Button("세이브 데이터 제거"))
+        {
+            ClearSaveData();
+        }
+    }
+
+    void ClearSaveData()
+    {
+        MiniGameSaveData.ClearSaveData();
+    }
+
 }
+#endif
